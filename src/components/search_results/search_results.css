@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+}
+
+.search-results {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.result-container, .playlist-container {
+    padding: 25px;
+    width: 30%;
+    height: 400px;
+    background-color: antiquewhite;
+}
+
+.playlist-input {
+    width: 35%;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #c3c3c3;
+    border-radius: 5px;
+}
