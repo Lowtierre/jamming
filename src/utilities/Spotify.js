@@ -9,8 +9,6 @@ const Spotify = {
         }
         const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
-        const clientId_alternative = window.location.href.match(/client_id=([^&]*)/);
-        console.log('clientId_alternative: ', clientId_alternative)
         if (urlAccessToken && urlExpiresIn) {
             accessToken = urlAccessToken[1];
             const expiresIn = Number(urlExpiresIn[1]);
@@ -85,6 +83,8 @@ const Spotify = {
         return fetch('https://api.spotify.com/v1/me/playlists', { headers: headers })
             .then(response => response.json())
             .then(data => {
+                const userId = data.id;
+                console.log(userId)
                 const playlists = data.items.map(item => ({
                     id: item.id,
                     name: item.name,
