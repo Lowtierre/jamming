@@ -80,21 +80,26 @@ const Spotify = {
         const accessToken = this.getAccessToken();
         const headers = { Authorization: `Bearer ${accessToken}` };
 
-        return fetch('https://api.spotify.com/v1/me/playlists', { headers: headers })
+        
+        return fetch('https://api.spotify.com/v1/me', { headers: headers })
             .then(response => response.json())
-            .then(data => {
-                const userId = data.id;
-                console.log(userId)
-                const playlists = data.items.map(item => ({
-                    id: item.id,
-                    name: item.name,
-                    tracks: [], // Initialize tracks property for each playlist
-                }));
-
-                const playlistPromises = playlists.map(playlist => {
-                    return fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
-                        headers: { Authorization: `Bearer ${accessToken}` },
-                    })
+            .then(jsonResponse => {
+                const userId = jsonResponse.id;
+                console.log(userId);
+                return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, { headers: headers })
+                .then(response => response.json())
+                .then(data => {
+    
+                    const playlists = data.items.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        tracks: [], // Initialize tracks property for each playlist
+                    }));
+                    
+                    const playlistPromises = playlists.map(playlist => {
+                        return fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+                            headers: { Authorization: `Bearer ${accessToken}` },
+                        })
                         .then(response => response.json())
                         .then(tracksData => {
                             playlist.tracks = tracksData.items.map(item => ({
@@ -106,9 +111,10 @@ const Spotify = {
                             }));
                             return playlist;
                         });
-                });
-
-                return Promise.all(playlistPromises);
+                    });
+                    
+                    return Promise.all(playlistPromises);
+                })
             });
     },
 }
