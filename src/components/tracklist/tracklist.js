@@ -4,12 +4,12 @@ import Track from '../track/track';
 function Tracklist({ tracklist, addSong }) {
   return (
     <div className='tracklist'>
-        {tracklist.map(track => {
+        {tracklist.map((track, index) => {
             return <Track
-            key={track.id}
+            key={index}
             id={track.id}
-            title={track.title}
-            author={track.author}
+            name={track.name}
+            artist={track.artist}
             btnIcon={'+'}
             handleSong={addSong}
         />

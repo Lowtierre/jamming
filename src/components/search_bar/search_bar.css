@@ -11,23 +11,21 @@
     width: 100%;
     padding: 8px 10px;
     font-size: 16px;
-    border: 1px solid #c3c3c3;
-    border-radius: 5px;
+    background-color: #22224455;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-bottom: 2px solid #fff;
+}
+
+.search-bar input[type='text']::placeholder {
+    color: #fff;
 }
 
 .search-bar input[type='submit'] {
-    width: 100%;
-    margin-top: 15px;
-    padding: 8px 10px;
-    font-size: 16px;
-    background-color: blueviolet;
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
+    background-color: #030360;
 }
 
 .search-bar input[type='submit']:hover {
-    color: blueviolet;
-    background-color: #edf;
+    background-color: #fff;
 }

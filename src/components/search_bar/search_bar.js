@@ -12,6 +12,7 @@ function SearchBar({ string, writeString, fetchSongs }) {
         fetchSongs(string)
     }
 
+
     return (
         <form className="search-bar" onSubmit={handleSubmitSong}>
             <input type="text" placeholder="Write song..." value={string} onChange={handleChangeText} />

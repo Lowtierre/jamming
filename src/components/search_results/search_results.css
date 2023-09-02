@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    padding: 0;
 }
 
 .search-results {
@@ -13,13 +14,51 @@
     padding: 25px;
     width: 30%;
     height: 400px;
-    background-color: antiquewhite;
+    background-color: #222244aa;
+    color: #fff;
+    border-radius: 10px;
+    overflow-y: scroll;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff11;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8a8aa59d;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a4fed;
+}
+
+/* .result-container */
+
 .playlist-input {
-    width: 35%;
+    width: 90%;
+    padding-top: 0;
+    color: #fff;
+    background-color: transparent;
     padding: 8px 10px;
     font-size: 16px;
-    border: 1px solid #c3c3c3;
-    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.playlist-input::placeholder {
+    color: #fff;
+    font-size: 18px;
+}
+
+.playlist-container input[type="submit"] {
+    width: 60%;
 }

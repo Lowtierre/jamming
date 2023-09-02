@@ -3,17 +3,28 @@ import React from 'react';
 import Tracklist from '../tracklist/tracklist';
 import Playlist from '../playlist/playlist';
 
-function SearchResults({ tracklist, playlist, addSong, removeSong }) {
+function SearchResults({ tracklist, playlist, addSong, removeSong, updatePlaylistTitle, title, savePlaylist }) {
+
+  const handleTitle = (e) => {
+    updatePlaylistTitle(e.target.value)
+  }
+
+  const handleSaving = (e) => {
+    e.preventDefault();
+    savePlaylist()
+  }
+
   return (
     <div className='search-results'>
       <div className='result-container'>
-        <h2>Results</h2>
+        <h1>Results</h1>
         {(tracklist.length > 0) ? <Tracklist tracklist={tracklist} addSong={addSong} /> : ''}
       </div>
-      <div className='playlist-container'>
-        <input placeholder='Playlist' className='playlist-input' onChange='' />
+      <form className='playlist-container' onSubmit={handleSaving}>
+        <input placeholder='Playlist' className='playlist-input' value={title} onChange={handleTitle} />
         {(playlist.length > 0) ? <Playlist playlist={playlist} removeSong={removeSong} /> : ''}
-      </div>
+        <input type="submit" value="Save" />
+      </form>
     </div>
   )
 }
