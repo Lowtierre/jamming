@@ -7,9 +7,10 @@ const Spotify = {
         if (accessToken) {
             return accessToken
         }
-        // console.log(accessToken)
         const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
+        const clientId_alternative = window.location.href.match(/client_id=([^&]*)/);
+        console.log('clientId_alternative: ', clientId_alternative)
         if (urlAccessToken && urlExpiresIn) {
             accessToken = urlAccessToken[1];
             const expiresIn = Number(urlExpiresIn[1]);
@@ -19,7 +20,6 @@ const Spotify = {
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
         }
-        console.log(accessToken)
     },
 
 
