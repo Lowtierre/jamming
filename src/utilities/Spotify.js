@@ -1,5 +1,5 @@
 const clientId = '6525d1287a8844dabab5deedf774dc69';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://jamming-lwtr.netlify.app/';
 let accessToken = '';
 
 const Spotify = {
