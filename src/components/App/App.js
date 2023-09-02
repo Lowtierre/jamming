@@ -13,7 +13,16 @@ function App() {
   const [userPlaylists, setUserPlaylists] = useState([]);
 
   useEffect(() => {
-    fetchUserPlaylists()
+    fetchUserPlaylists();
+    const accessToken = this.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+
+    return fetch('https://api.spotify.com/v1/me', { headers: headers })
+        .then(response => response.json())
+        .then(jsonResponse => {
+            const userId = jsonResponse.id;
+            console.log(userId)
+          })
   }, []);
 
   const fetchUserPlaylists = () => {
