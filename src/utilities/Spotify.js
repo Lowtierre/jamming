@@ -1,4 +1,4 @@
-const clientId = 'c42834e667cb439e8cd210f2fb4a36b9';
+const clientId = '6525d1287a8844dabab5deedf774dc69';
 const redirectUri = 'https://jamming-lwtr.netlify.app';
 let accessToken = '';
 
