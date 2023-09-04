@@ -83,14 +83,12 @@ const Spotify = {
         return fetch('https://api.spotify.com/v1/me/playlists', { headers: headers })
             .then(response => response.json())
             .then(data => {
-                const playlists = data.items.map(item => ({
-                    id: item.id,
-                    name: item.name,
-                    tracks: [], // Initialize tracks property for each playlist
-                }))
-            .catch(() => {
-                console.log('Error: no playlist')
-            })
+                    const playlists = data.items.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        tracks: [], // Initialize tracks property for each playlist
+                    }));
+
 
                 const playlistPromises = playlists.map(playlist => {
                     return fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
@@ -108,9 +106,12 @@ const Spotify = {
                             return playlist;
                         });
                 });
-
+                
                 return Promise.all(playlistPromises);
-            });
+            })
+            .catch(() => {
+                console.log('cazzooo')
+            })
     },
 }
 
