@@ -110,7 +110,7 @@ const Spotify = {
                 return Promise.all(playlistPromises);
             })
             .catch(() => {
-                console.log('cazzooo')
+                console.log('No playlist saved yet')
             })
     },
 }
