@@ -87,7 +87,10 @@ const Spotify = {
                     id: item.id,
                     name: item.name,
                     tracks: [], // Initialize tracks property for each playlist
-                }));
+                }))
+            .catch(() => {
+                console.log('Error: no playlist')
+            })
 
                 const playlistPromises = playlists.map(playlist => {
                     return fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
