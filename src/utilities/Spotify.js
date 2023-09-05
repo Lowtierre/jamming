@@ -1,6 +1,6 @@
 const clientId = '6525d1287a8844dabab5deedf774dc69';
 const redirectUri = 'https://jamming-lwtr.netlify.app';
-let accessToken = '';
+let accessToken = window.localStorage.getItem('spotyToken');
 
 const Spotify = {
     getAccessToken() {
@@ -11,8 +11,11 @@ const Spotify = {
         const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
         if (urlAccessToken && urlExpiresIn) {
             accessToken = urlAccessToken[1];
+            window.localStorage.setItem('spotyToken', accessToken);
             const expiresIn = Number(urlExpiresIn[1]);
-            window.setTimeout(() => accessToken = '', expiresIn * 1000);
+            window.setTimeout(() => {
+                window.localStorage.removeItem('spotyToken');
+            }, expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
         } else {
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
@@ -22,7 +25,7 @@ const Spotify = {
 
 
     search(term) {
-        const accessToken = Spotify.getAccessToken();
+        const accessToken = this.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
             headers: { Authorization: `Bearer ${accessToken}` },
         })
