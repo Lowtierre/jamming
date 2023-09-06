@@ -1,31 +1,28 @@
 const clientId = '6525d1287a8844dabab5deedf774dc69';
 const redirectUri = 'https://jamming-lwtr.netlify.app';
 // const redirectUri = 'http://localhost:3000';
-let accessToken = '';
+let accessToken = window.localStorage.getItem('spotyToken');
 
 const Spotify = {
     getAccessToken() {
+        console.log(accessToken)
         if (accessToken) {
             return accessToken
         }
         const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
-        console.log('Passaggio1: ', window.location.href)
-        console.log('urlAccessToken: ', urlAccessToken)
-        console.log('urlExpiresIn: ', urlExpiresIn)
         if (urlAccessToken && urlExpiresIn) {
             accessToken = urlAccessToken[1];
             window.localStorage.setItem('spotyToken', accessToken);
             const expiresIn = Number(urlExpiresIn[1]);
             window.setTimeout(() => {
                 window.localStorage.removeItem('spotyToken');
+                window.history.pushState('Access Token', null, '/');
             }, expiresIn * 1000);
-            window.history.pushState('Access Token', null, '/');
         } else {
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
         }
-        // console.log('Passaggio2: ', accessUrl)
     },
 
 
