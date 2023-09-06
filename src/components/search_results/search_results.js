@@ -11,7 +11,7 @@ function SearchResults({ tracklist, playlist, addSong, removeSong, updatePlaylis
 
   const handleSaving = (e) => {
     e.preventDefault();
-    savePlaylist()
+    savePlaylist();
   }
 
   return (
