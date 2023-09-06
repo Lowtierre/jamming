@@ -11,6 +11,8 @@ const Spotify = {
         const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
         console.log('Passaggio1: ', window.location.href)
+        console.log('urlAccessToken: ', urlAccessToken)
+        console.log('urlExpiresIn: ', urlExpiresIn)
         if (urlAccessToken && urlExpiresIn) {
             accessToken = urlAccessToken[1];
             window.localStorage.setItem('spotyToken', accessToken);
