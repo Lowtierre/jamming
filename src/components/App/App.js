@@ -19,7 +19,11 @@ function App() {
   const fetchUserPlaylists = () => {
     Spotify.getUserPlaylists()
       .then((playlists) => {
-        setUserPlaylists(playlists)
+        if (playlist) {
+          setUserPlaylists(playlists)
+        } else {
+          setUserPlaylists([])
+        }
         console.log('Playlists: ', playlists);
       })
       .catch((error) => {
